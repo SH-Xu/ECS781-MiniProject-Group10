@@ -1,9 +1,8 @@
 import json
+import requests
 
-from flask import jsonify
 from flask import Flask, request
 from flask.wrappers import Response
-from flask_sqlalchemy import SQLAlchemy
 from mongoDB import MongoDB
 
 app = Flask(__name__)
@@ -12,9 +11,10 @@ app = Flask(__name__)
 def index():
     return "This is project work for ECS781 group 10"
 
-@app.route("/search/<isbn>")
-def search_book(index):
-    pass
+@app.route("/detail/<type>/<index>")
+def detail_book(type, index):
+    url = "https://openlibrary.org/api/books?bibkeys={}:{}&format=json".format(type, index)
+    return requests.get(url).json()
 
 
 @app.route("/mylibrary", methods=["GET"])
