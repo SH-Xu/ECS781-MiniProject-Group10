@@ -73,7 +73,7 @@ def update_book():
 @app.route("/mylibrary", methods=["DELETE"])
 def del_book():
     data = request.json    
-    if data is None or data == {}:
+    if data is None or data == {} or "Filter" not in data:
         return Response(
             response=json.dumps({"Error": "Please provide connection information"}),
             status=400,
