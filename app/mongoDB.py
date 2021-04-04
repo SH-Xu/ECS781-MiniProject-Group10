@@ -3,8 +3,8 @@ from pymongo import MongoClient
 
 class MongoDB():
     def __init__(self, data):
-        self.client = MongoClient("mongodb://mongo_service:27017/")
-        # self.client = MongoClient("mongodb://localhost:5000")
+    #   self.client = MongoClient("mongodb://mongo_service:27017/")
+        self.client = MongoClient("mongodb://localhost:5000")
         database = data["database"]
         collection = data["collection"]
         cursor = self.client[database]
