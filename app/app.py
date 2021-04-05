@@ -89,4 +89,5 @@ def del_book():
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5001)
+    context = ("app/cert.pem", "app/key.pem")
+    app.run(host="0.0.0.0", port=5001, ssl_context=context)

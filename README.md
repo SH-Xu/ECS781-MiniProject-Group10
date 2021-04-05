@@ -54,11 +54,13 @@ Request Body:
 }
 ```
 ```database```: Assign which database to use.
+
 ```collection```: Assign which collection to use.
 If the database or collection doesn't exsist, it will be created automatically.
+
 ```Document```: The information will be insertedo into the database.
 
-Respond Body:
+Response Body:
 ```
 {
     "Status": "Sucessfully Inserted",
@@ -75,7 +77,7 @@ Request Body:
     "collection": "read"
 }
 ```
-Respond Body:
+Response Body:
 ```
 [
     {
@@ -86,8 +88,66 @@ Respond Body:
 ]
 ```
 #### 1.3.3 PUT
+Request Body:
+```
+{
+    "database": "books",
+    "collection": "read",
+    "Filter":{
+        "Title":"Book1"
+    },
+    "DataToBeUpdated":{
+        "Description": "This is more than a book",
+        "Modefied Date": "Today"
+    }
+}
+```
+
+```Filter```: Identify which document to be modefied.
+
+```DataToBeUpdated```: The new data that apply to the selected document.
+
+
+Response Body:
+```
+{
+    "Status": "Successfully Update"
+}
+```
+
+To justify the PUT request actually worked, use GET request again.
+
+Response Body:
+```
+[
+    {
+        "Title": "Book1",
+        "Author": "Author1",
+        "Description": "This is more than a book",
+        "Modefied Date": "Today"
+    }
+]
+```
 
 #### 1.3.4 DELETE
+Request Body:
+```
+{
+    "database": "books",
+    "collection": "read",
+    "Filter": {
+        "Title": "Book1"
+    }
+}
+```
+
+Reponse Body:
+
+```
+{
+    "Status": "Successfully Deleted"
+}
+```
 
 ## 2. Adavanced Task
 
