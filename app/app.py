@@ -29,32 +29,15 @@ def get_md5(token):
 
 def gen_hash_token(uid):
     s1 = ':'.join([uid, str(random.random()), str(time.time() + 72000)])
-    print("\ns1:", s1)
-    print("type(s1):", type(s1))
     token = base64.b64encode(s1.encode('utf-8'))
-    print("\ntoken:", token)
-    print("type(token):", type(token))
-
     users[uid].append(token)
     return token
 
 
 def verify_token(token):
     _token = base64.b64decode(token)
-    print("\n_token:", _token)
-    print("type(_token):", type(_token))
-
     _token1 = _token.decode('utf-8')
-    print("\n_token1:", _token1)
-    print("type(_token1):", type(_token1))
-
     uid_name = _token1.split(':')[0]
-    print("\nt1:", uid_name)
-    print("type(t1):", type(uid_name))
-
-    get1 = users.get(_token1.split(':')[0])[-1]
-    print("\nget1", get1)
-
     if not users.get(_token1.split(':')[0])[-1] == token:
         return "The token is not correct or matches your uid "
     if float(_token1.split(':')[-1]) >= time.time():
@@ -75,28 +58,10 @@ def index():
 @app.route("/apply_token", methods=["POST", "GET"])  # 把token写入字典uid后面
 def apply_token():
     r1 = request.headers['Authorization'].split(' ')[-1]
-    print("r1:", r1)
-    print("type(r1):", type(r1))
     r2 = base64.b64decode(r1)
-    print("\nr2: ", r2)
-    print("type(r2):", type(r2))
     uid, pw = r2.split(b':')
-    # print("uid: ", uid)
-    # print("pw: ", pw)
-    # print("type(uid): ", type(uid))
     uid1 = uid.decode('utf-8')
     pw1 = pw.decode('utf-8')
-    print("\nuid1: ", uid1)
-    print("pw1: ", pw1)
-    print("type(uid1): ", type(uid1))
-    print("type(pw1): ", type(pw1))
-
-    get1 = users.get(uid1)
-    print(get1)
-
-    get2 = users.get(uid1)[0]
-    print(get2)
-
     if users.get(uid1)[0] == pw1:
         return gen_hash_token(uid1)
     else:
